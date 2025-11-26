@@ -1,1 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>NeomindAI — Cognitive Intelligence Engine</title>
 
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: #0b0b0c;
+            font-family: "Inter", Arial, sans-serif;
+            color: #f2f2f2;
+        }
+
+        header {
+            padding: 30px;
+            text-align: center;
+            border-bottom: 1px solid #222;
+        }
+
+        h1 {
+            font-size: 2.8rem;
+            margin: 0;
+            font-weight: 700;
+            background: linear-gradient(90deg, #4af, #6ff, #fff);
+            -webkit-background-clip: text;
+            color: transparent;
+        }
+
+        h2 {
+            font-size: 1.4rem;
+            font-weight: 400;
+            opacity: 0.8;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 60px auto;
+            padding: 20px;
+        }
+
+        .card {
+            background: #141416;
+            padding: 30px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            border: 1px solid #232323;
+        }
+
+        .card h3 {
+            margin-top: 0;
+            font-size: 1.4rem;
+        }
+
+        button {
+            background: #007bff;
+            padding: 14px 26px;
+            border: none;
+            border-radius: 6px;
+            color: #fff;
+            cursor: pointer;
+            font-size: 1rem;
+            margin-top: 10px;
+            transition: 0.2s;
+        }
+
+        button:hover {
+            background: #3399ff;
+        }
+
+        footer {
+            margin-top: 60px;
+            text-align: center;
+            padding: 30px;
+            opacity: 0.7;
+            font-size: 0.9rem;
+            border-top: 1px solid #222;
+        }
+
+        .response-box {
+            background: #111;
+            border-left: 3px solid #09f;
+            margin-top: 15px;
+            padding: 15px;
+            font-size: 0.95rem;
+            border-radius: 4px;
+            word-wrap: break-word;
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <h1>NeomindAI</h1>
+        <h2>The Cognitive Engine That Thinks Like Tomorrow</h2>
+    </header>
+
+    <div class="container">
+
+        <!-- Intro Card -->
+        <div class="card">
+            <h3>Welcome to NeomindAI</h3>
+            <p>
+                NeomindAI is a hybrid cognitive engine built with ColdFusion, Python, C++, 
+                embeddings, neural modules, and high-performance data intelligence systems.
+                This interface lets you test Neomind endpoints directly from your browser.
+            </p>
+        </div>
+
+        <!-- API Test Section -->
+        <div class="card">
+            <h3>Try the AI Endpoint</h3>
+            <p>Type a prompt and send it to the NeomindAI backend.</p>
+
+            <input id="promptInput" type="text" placeholder="Type your prompt here..."
+                   style="width:100%; padding:14px; border-radius:6px; border:none; margin-top:10px;">
+
+            <button onclick="runNeomind()">Send to Neomind</button>
+
+            <div id="responseBox" class="response-box"></div>
+        </div>
+
+        <!-- Docs & Links -->
+        <div class="card">
+            <h3>Project Links</h3>
+            <p>
+                <a href="https://github.com/QUBUHUB-incs/NeomindAI" 
+                   style="color:#33aaff; text-decoration:none;">GitHub Repository →</a>
+            </p>
+        </div>
+
+    </div>
+
+    <footer>
+        © 2025 NeomindAI • Designed by QUBUHUB • Powered by Cognitive Engineering
+    </footer>
+
+    <script>
+        async function runNeomind() {
+            const prompt = document.getElementById('promptInput').value;
+            const box = document.getElementById('responseBox');
+
+            if (!prompt.trim()) {
+                box.style.display = 'block';
+                box.innerHTML = "⚠️ Please enter a prompt first.";
+                return;
+            }
+
+            box.style.display = 'block';
+            box.innerHTML = "⏳ Thinking...";
+
+            try {
+                const res = await fetch("http://localhost:5000/infer", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ prompt })
+                });
+
+                const data = await res.json();
+                box.innerHTML = "<strong>Neomind Response:</strong><br><br>" + data.output;
+
+            } catch (e) {
+                box.innerHTML = "❌ Unable to reach Neomind backend.";
+            }
+        }
+    </script>
+
+</body>
+</html>
