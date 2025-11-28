@@ -64,11 +64,3 @@ These feed the neural network, which decides what to do next.
 * **Neuromorphic chips:** Intel Loihi, IBM TrueNorth, designed to simulate neurons efficiently
 
 ---
-
-If you want, I can **sketch a full blueprint for a Neurobot**, including:
-
-* The neural “brain” layout
-* Sensors and motor integration
-* Arduino/Pi + AI code examples
-* Learning algorithms ready to run
-
